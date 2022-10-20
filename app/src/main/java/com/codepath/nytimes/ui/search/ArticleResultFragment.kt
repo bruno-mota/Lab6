@@ -6,15 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.core.widget.ContentLoadingProgressBar
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.codepath.nytimes.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codepath.nytimes.networking.CallbackResponse
 import com.codepath.nytimes.models.Article
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 
 /**
@@ -37,20 +35,30 @@ class ArticleResultFragment
     var adapter = MyArticleResultRecyclerViewAdapter()
     override fun onPrepareOptionsMenu(menu: Menu) {
         // TODO (checkpoint #4): Uncomment this code when you implement the search menu
-//        SearchView item = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//        item.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                loadNewArticlesByQuery(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return true;
-//            }
-//        });
+         val item : SearchView = menu.findItem(R.id.action_search).actionView as SearchView
+        item.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                loadNewArticlesByQuery(query);
+                return false;
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true;
+            }
+        });
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search,menu)
+
+
+
+        super.onCreateOptionsMenu(menu, inflater)
+
+
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#202020</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="lighter_gray">#ddd</color>
-
+    <color name="white">#FFFFFF</color>
 </resources>
